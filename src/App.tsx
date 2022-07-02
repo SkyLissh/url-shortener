@@ -6,19 +6,15 @@ import Clipboard from "src/components/Clipboard";
 
 import URL from "src/models/url";
 
-interface URLRequest {
-	target_url: string;
-}
-
 export default function App() {
 	const baseUrl = `${import.meta.env.VITE_API_URL}${import.meta.env.VITE_API_VERSION}`;
 
 	const [data, setData] = useState<URL>();
 	const [error, setError] = useState<Error>();
-	const [url, setUrl] = useState<URLRequest>();
+	const [url, setUrl] = useState<string>();
 
 	function onChange(e: React.ChangeEvent<HTMLInputElement>) {
-		setUrl({ target_url: e.target.value });
+		setUrl(e.target.value);
 	}
 
 	async function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -31,14 +27,18 @@ export default function App() {
 					headers: {
 						"Content-Type": "application/json"
 					},
-					body: JSON.stringify({ url })
+					body: `{"target_url": "${url}"}`
 				});
 
-				setData((await response.json()) as URL);
-
-				if (!response.ok) {
-					throw new Error(response.statusText);
+				if (response.status == 422) {
+					throw new Error("Invalid URL");
+				} else if (!response.ok) {
+					const errorMessage = await response.json();
+					throw new Error(errorMessage.detail);
 				}
+
+				setError(undefined);
+				setData((await response.json()) as URL);
 			} catch (error) {
 				setError(error as Error);
 			}
@@ -57,7 +57,7 @@ export default function App() {
 
 				<form onSubmit={onSubmit} className="mt-14">
 					<Input color="text-slate-500" onChange={onChange} />
-					{data && <Clipboard link={data.url} />}
+					{data && <Clipboard link={`${import.meta.env.VITE_HOME_URL}${data.url}`} />}
 					{error && <p className="text-red-500 text-center my-4">{error.message}</p>}
 					<Button text="Shorten It!" />
 				</form>
