@@ -1,13 +1,10 @@
 type Props = {
 	link: string;
-	hide?: boolean;
 };
 
-export default function Clipboard({ link, hide }: Props) {
-	const hidden = hide ? "hidden" : "";
-
+export default function Clipboard({ link }: Props) {
 	return (
-		<div className={`bg-gray-200 p-4 mt-4 rounded-lg flex justify-between ${hidden}`}>
+		<div className={"bg-gray-200 p-4 mt-4 rounded-lg flex justify-between"}>
 			<p>{link}</p>
 			<button>
 				<svg

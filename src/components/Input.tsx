@@ -1,8 +1,11 @@
+import { ChangeEventHandler } from "react";
+
 type Props = {
 	color: string;
+	onChange: ChangeEventHandler<HTMLInputElement>;
 };
 
-export default function Input({ color }: Props) {
+export default function Input({ color, onChange }: Props) {
 	return (
 		<label className="relative">
 			<span className="absolute inset-y-0 left-0 pl-2">
@@ -24,6 +27,7 @@ export default function Input({ color }: Props) {
 			<input
 				className="bg-gray-200 pl-10 border-none py-4 rounded-lg w-full placeholder:text-slate-500 focus:ring-indigo-700"
 				type="text"
+				onChange={onChange}
 				placeholder="Paste a link to shorten it!"
 			/>
 		</label>
