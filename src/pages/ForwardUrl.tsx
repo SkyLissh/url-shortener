@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import Url from "src/models/url";
 
+import Layout from "src/components/Layout";
+
 type Params = {
 	urlId: string;
 };
@@ -32,5 +34,7 @@ export function ForwardUrl() {
 		getTargetUrl();
 	}, []);
 
-	return <div>ForwardUrl</div>;
+	return (
+		<Layout img="redirect" title="Redirect..." description="You're beign redirect" />
+	);
 }
