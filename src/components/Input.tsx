@@ -26,7 +26,7 @@ export default function Input({ color, onChange }: Props) {
 			</span>
 			<input
 				className="bg-gray-200 pl-10 border-none py-4 rounded-lg w-full placeholder:text-slate-500 focus:ring-indigo-700"
-				type="text"
+				type="url"
 				onChange={onChange}
 				placeholder="Paste a link to shorten it!"
 			/>
