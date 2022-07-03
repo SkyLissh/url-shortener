@@ -31,8 +31,10 @@ export default function App() {
 				});
 
 				if (response.status == 422) {
+					setData(undefined);
 					throw new Error("Invalid URL");
 				} else if (!response.ok) {
+					setData(undefined);
 					const errorMessage = await response.json();
 					throw new Error(errorMessage.detail);
 				}
@@ -42,6 +44,8 @@ export default function App() {
 			} catch (error) {
 				setError(error as Error);
 			}
+		} else {
+			setError(new Error("URL is required"));
 		}
 	}
 
