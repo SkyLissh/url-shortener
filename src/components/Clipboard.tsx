@@ -9,12 +9,17 @@ type Props = {
 
 export default function Clipboard({ link }: Props) {
 	const tooltipRef = useRef<HTMLDivElement>(null);
-	let message = useClipboard("#copy-button", toggleTooltip);
+	let message = useClipboard("#copy-button", showTooltip);
 
-	function toggleTooltip() {
+	function showTooltip() {
 		if (tooltipRef.current) {
-			console.log("toggleTooltip");
-			tooltipRef.current.classList.toggle("hidden");
+			tooltipRef.current.classList.remove("hidden");
+		}
+	}
+
+	function hideTooltip() {
+		if (tooltipRef.current && !tooltipRef.current.classList.contains("hidden")) {
+			tooltipRef.current.classList.add("hidden");
 		}
 	}
 
@@ -25,7 +30,7 @@ export default function Clipboard({ link }: Props) {
 				type="button"
 				id="copy-button"
 				className="relative"
-				onMouseOut={toggleTooltip}
+				onMouseOut={hideTooltip}
 				data-clipboard-text={link}
 			>
 				<svg
@@ -42,7 +47,7 @@ export default function Clipboard({ link }: Props) {
 						d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
 					/>
 				</svg>
-				<Tooltip ref={tooltipRef} message="Clipboard!" />
+				<Tooltip ref={tooltipRef} message={message} />
 			</button>
 		</div>
 	);

@@ -11,7 +11,7 @@ const Tooltip = forwardRef<HTMLDivElement, Props>(({ message }, ref) => {
 	return (
 		<div
 			ref={ref}
-			className={`hidden absolute left-50% -ml-[38px] bottom-[150%] p-[5px] ${after}`}
+			className={`hidden absolute left-50% -ml-7 bottom-[150%] p-[5px] ${after}`}
 		>
 			<span className="bg-indigo-500 text-white text-sm p-2 rounded-lg">{message}</span>
 		</div>
