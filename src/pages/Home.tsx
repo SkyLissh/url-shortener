@@ -22,7 +22,7 @@ export function Home() {
 
 		if (url) {
 			try {
-				const response = await fetch(`${baseUrl}/url`, {
+				const response = await fetch(`${baseUrl}/url/`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
