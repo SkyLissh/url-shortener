@@ -1,5 +1,8 @@
 import Layout from "src/components/Layout";
 
+import notFound from "src/images/not-found.svg";
+
 export function NotFound() {
-	return <Layout img="not_found" title="404" description="Oops! Something went wrong" />;
+	console.log(notFound);
+	return <Layout img={notFound} title="404" description="Oops! Something went wrong" />;
 }

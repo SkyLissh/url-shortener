@@ -5,6 +5,8 @@ import Url from "src/models/url";
 
 import Layout from "src/components/Layout";
 
+import redirect from "src/images/redirect.svg";
+
 type Params = {
 	urlId: string;
 };
@@ -35,6 +37,6 @@ export function ForwardUrl() {
 	}, []);
 
 	return (
-		<Layout img="redirect" title="Redirect..." description="You're beign redirect" />
+		<Layout img={redirect} title="Redirect..." description="You're beign redirect" />
 	);
 }
