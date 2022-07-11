@@ -17,6 +17,7 @@ export default function Input({ color, onChange }: Props) {
 					stroke="currentColor"
 					strokeWidth={2}
 				>
+					<title>Link</title>
 					<path
 						strokeLinecap="round"
 						strokeLinejoin="round"

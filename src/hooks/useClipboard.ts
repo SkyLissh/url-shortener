@@ -8,7 +8,6 @@ export default function useClipboard(
 	const [message, setMessage] = useState("");
 
 	useEffect(() => {
-		console.log("useClipboard");
 		const clipboard = new ClipboardJS(selector);
 
 		clipboard.on("success", (e: ClipboardJS.Event) => {

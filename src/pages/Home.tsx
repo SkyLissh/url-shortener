@@ -4,11 +4,12 @@ import Button from "src/components/Button";
 import Input from "src/components/Input";
 import Clipboard from "src/components/Clipboard";
 
+import { settings } from "src/utils/settings";
+
 import URL from "src/models/url";
+import ApiError from "src/models/apiError";
 
 export function Home() {
-	const baseUrl = `${import.meta.env.VITE_API_URL}${import.meta.env.VITE_API_VERSION}`;
-
 	const [data, setData] = useState<URL>();
 	const [error, setError] = useState<Error>();
 	const [url, setUrl] = useState<string>();
@@ -22,7 +23,7 @@ export function Home() {
 
 		if (url) {
 			try {
-				const response = await fetch(`${baseUrl}/url/`, {
+				const response = await fetch(`${settings.apiUrl}/url/`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
@@ -35,7 +36,7 @@ export function Home() {
 					throw new Error("Invalid URL");
 				} else if (!response.ok) {
 					setData(undefined);
-					const errorMessage = await response.json();
+					const errorMessage: ApiError = await response.json();
 					throw new Error(errorMessage.detail);
 				}
 
@@ -61,7 +62,7 @@ export function Home() {
 
 				<form onSubmit={onSubmit} className="mt-14">
 					<Input color="text-slate-500" onChange={onChange} />
-					{data && <Clipboard link={`${import.meta.env.VITE_HOME_URL}${data.url}`} />}
+					{data && <Clipboard link={`${settings.homeUrl}${data.url}`} />}
 					{error && <p className="text-red-500 text-center my-4">{error.message}</p>}
 					<Button text="Shorten It!" />
 				</form>
