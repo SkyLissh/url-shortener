@@ -23,10 +23,6 @@ jobs:
         run: |
           npm -g install yarn
           yarn install
-      - name: Run Linters
-        uses: wearerequired/lint-action@v2
-        with:
-          eslint: true
 
       - name: Run tests
         run: yarn test
