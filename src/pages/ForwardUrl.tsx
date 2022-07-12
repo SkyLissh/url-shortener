@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import Layout from "src/components/Layout";
@@ -11,20 +11,22 @@ type Params = {
 };
 
 export function ForwardUrl() {
-	const { urlId } = useParams<Params>();
+	const [data, setData] = useState<URL>();
 
+	const { urlId } = useParams<Params>();
 	const navigate = useNavigate();
 
 	async function getTargetUrl() {
 		try {
 			const response = await fetch(`${settings.apiUrl}/url/${urlId}`);
+			console.log(response.status);
+			console.log(urlId);
 
 			if (!response.ok) {
 				throw new Error("Invalid URL");
 			}
 
-			const data = (await response.json()) as URL;
-			window.location.replace(data.target_url);
+			setData((await response.json()) as URL);
 		} catch (error) {
 			navigate("/404", { replace: true });
 		}
@@ -35,11 +37,14 @@ export function ForwardUrl() {
 	}, []);
 
 	return (
-		<Layout
-			img="/assets/redirect.svg"
-			alt="Redirect"
-			title="Redirect..."
-			description="You're beign redirect"
-		/>
+		<>
+			<Layout
+				img="/assets/redirect.svg"
+				alt="Redirect"
+				title="Redirect..."
+				description={`You're beign redirect`}
+			/>
+			{data && window.location.replace(data.target_url)}
+		</>
 	);
 }
