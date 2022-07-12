@@ -19,8 +19,6 @@ export function ForwardUrl() {
 	async function getTargetUrl() {
 		try {
 			const response = await fetch(`${settings.apiUrl}/url/${urlId}`);
-			console.log(response.status);
-			console.log(urlId);
 
 			if (!response.ok) {
 				throw new Error("Invalid URL");
