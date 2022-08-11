@@ -16,3 +16,9 @@ test("loads and render Button with onClick", () => {
 
 	expect(onClick).toHaveBeenCalled();
 });
+
+test("loads and render Button with disabled", () => {
+	render(<Button text="Click me" disabled />);
+
+	expect(screen.getByText("Click me")).toBeDisabled();
+});
