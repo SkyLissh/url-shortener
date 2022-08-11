@@ -28,12 +28,12 @@ export function Home() {
 		if (url) {
 			try {
 				setLoading(true);
-				const response = await fetch(`${settings.apiUrl}/url`, {
+				const response = await fetch(`${settings.apiUrl}/url/`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
 					},
-					body: `{"target_url": "${url}"}`
+					body: JSON.stringify({ target_url: url })
 				});
 
 				if (response.status == 422) {
