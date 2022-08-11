@@ -7,6 +7,10 @@ interface URLRequest {
 	target_url: string;
 }
 
+interface URLUpdate {
+	clicks: number;
+}
+
 function isURL(url: string): boolean {
 	try {
 		const validURL = new URL(url);
@@ -40,6 +44,20 @@ export const server = setupServer(
 			const { id } = req.params;
 			if (id === "1ZXbYBcoOA") {
 				return res(ctx.status(200), ctx.json(mockResponse));
+			}
+
+			return res(ctx.status(404));
+		}
+	),
+
+	rest.patch<URLUpdate, { id: string }, URL>(
+		"https://api.example.com/url/:id",
+		(req, res, ctx) => {
+			const { id } = req.params;
+			const { clicks } = req.body;
+
+			if (id === "1ZXbYBcoOA") {
+				return res(ctx.status(200), ctx.json({ ...mockResponse, clicks }));
 			}
 
 			return res(ctx.status(404));
