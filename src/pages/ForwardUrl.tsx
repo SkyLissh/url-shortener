@@ -24,7 +24,28 @@ export function ForwardUrl() {
 				throw new Error("Invalid URL");
 			}
 
-			setData((await response.json()) as URL);
+			const url = (await response.json()) as URL;
+
+			updateClicks(url.clicks);
+			setData(url);
+		} catch (error) {
+			navigate("/404", { replace: true });
+		}
+	}
+
+	async function updateClicks(clicks: number) {
+		try {
+			const response = await fetch(`${settings.apiUrl}/url/${urlId}`, {
+				method: "PATCH",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({ clicks: clicks + 1 })
+			});
+
+			if (!response.ok) {
+				throw new Error("Invalid URL");
+			}
 		} catch (error) {
 			navigate("/404", { replace: true });
 		}
