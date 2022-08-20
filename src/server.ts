@@ -29,7 +29,7 @@ const mockResponse: URL = {
 };
 
 export const server = setupServer(
-	rest.post<URLRequest, {}, URL>("https://api.example.com/url/", (req, res, ctx) => {
+	rest.post<URLRequest, {}, URL>("https://api.example.com/url", (req, res, ctx) => {
 		const { target_url } = req.body;
 		if (!isURL(target_url)) {
 			return res(ctx.status(422));
