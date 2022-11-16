@@ -11,6 +11,6 @@ For that purpose, I created a simple React app that uses [React Router](https://
 ## ✨ Links
 
 - [⚡ Backend Code](https://github.com/skylissh/url-shortener-api/)
-- [🔴 Live Site](https://url.skylissh.me/)
+- [🔴 Live Site](https://url.skylissh.live/)
 
-![Image Preview](https://url.skylissh.me/assets/meta-image.png)
+![Image Preview](https://url.skylissh.live/assets/meta-image.png)
